@@ -1,0 +1,44 @@
+﻿<Window x:Class="KNS_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KNS_app"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>
+        <local:IsObsoleteToTextDecorationsConverter x:Key="IsObsoleteToTextDecorationsConverter"/>
+        <Style x:Key="QuantityStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" 
+              Value="{Binding 
+                RelativeSource={RelativeSource Self}, 
+                Path=Text, 
+                Converter={StaticResource IsObsoleteToTextDecorationsConverter}}" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="787*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Save your profile" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+        <Label x:Name="nameLabel" Content="Hello," HorizontalAlignment="Left" Margin="284,17,0,0" VerticalAlignment="Top" Width="483"/>
+        <Label x:Name="courseName" Content="Chapters in course '':" HorizontalAlignment="Left" Margin="30,63,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="ChDt" HorizontalAlignment="Left" Height="246" Margin="30,94,0,0" VerticalAlignment="Top" Width="200" DataContext="{StaticResource ItemCollectionViewSource}" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="ChDt_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=ChapterName}" Header="Chapter" ElementStyle="{StaticResource QuantityStyle}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btStartTest" Content="Start tests" HorizontalAlignment="Left" Margin="30,370,0,0" VerticalAlignment="Top" Width="200" Click="btStartTest_Click"/>
+        <Button x:Name="btStartChapter" Content="Read chapter" HorizontalAlignment="Left" Margin="30,345,0,0" VerticalAlignment="Top" Width="200" Click="btStartChapter_Click"/>
+        <WebBrowser x:Name="ChView" HorizontalAlignment="Left" Height="296" Margin="284,94,0,0" VerticalAlignment="Top" Width="493"/>
+        <TextBox x:Name="tbq" HorizontalAlignment="Left" Height="61" Margin="284,98,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="493"/>
+        <RadioButton x:Name="rba1" Content="RadioButton" HorizontalAlignment="Left" Margin="284,295,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rba2" Content="RadioButton" HorizontalAlignment="Left" Margin="284,265,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rba3" Content="RadioButton" HorizontalAlignment="Left" Margin="284,235,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rba4" Content="RadioButton" HorizontalAlignment="Left" Margin="284,205,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rba5" Content="RadioButton" HorizontalAlignment="Left" Margin="284,175,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
